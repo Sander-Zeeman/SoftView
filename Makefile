@@ -8,9 +8,6 @@ terminal.ui: libSoftView.so UIs/terminal/main.c
 
 libSoftView.so: $(LIB_SOURCES)
 	$(CC) $(CFLAGS) -shared -o libSoftView.so -fPIC $^
-	
-run:
-	LD_LIBRARY_PATH=. ./terminal.ui /mnt/c/Users/szeem/Desktop/test.png
 
 clean:
 	rm -f libSoftView.so && rm -f *.ui

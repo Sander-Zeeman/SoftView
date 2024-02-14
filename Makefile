@@ -1,14 +1,18 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -pedantic -ggdb
+CC = clang
+CFLAGS = -Wall -Wextra -Wswitch-enum
 
-all: SoftView
+all: SoftView.term SoftView.wasm
 
-SoftView: main.o
-	$(CC) main.o -o SoftView
+SoftView.o: SoftView.c
+	$(CC) $(CFLAGS) -c SoftView.c 
 
-main.o: main.c
-	$(CC) $(CFLAGS) main.c -c -o main.o
+SoftView.term: SoftView.o
+	$(CC) $(CFLAGS) -o SoftView.term main.c SoftView.o
+
+SoftView.wasm: SoftView.c
+	$(CC) $(CFLAGS) -DWASM -Os --target=wasm32 --no-standard-libraries -Wl,--no-entry -Wl,--allow-undefined -o SoftView.wasm SoftView.c
 
 clean:
-	rm main.o
-	rm SoftView
+	rm -f SoftView.o
+	rm -f SoftView.term
+	rm -f SoftView.wasm

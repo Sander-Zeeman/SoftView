@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SoftView</title>
+    <style>
+    		body {
+    			margin: 3rem;
+    			max-width: 800px;
+    			
+    			display: flex;
+    			flex-direction: column;
+    			gap: 2rem;
+    			align-items: stretch;
+    			justify-content: center;
+    		}
+
+				#input {
+					height: 1.5rem;
+				}
+
+        #app {
+        	width: 800px;
+        	height: 600px;
+        	overflow: hidden;
+        }
+    </style>
+  </head>
+  <body>
+    <canvas id="app" width=800 height=600></canvas>
+    <input id="input" onkeypress="onEnterPress();" />
+    <script src="main.js"></script>
+  </body>
+</html>

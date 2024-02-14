@@ -7,9 +7,8 @@
 extern unsigned char __heap_base;
 unsigned int bump_pointer = &__heap_base;
 void *scuffed_malloc(unsigned long long n) {
-	unsigned int r = bump_pointer;
-	bump_pointer += n;
-	return (void *)r;
+	(void) n;
+	return (void *)bump_pointer;
 }
 #else
 #define SOFTVIEW_API(foo) __attribute__(())

@@ -2,10 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#define SZ_STRING_IMPLEMENTATION
 #include "SoftView.h"
-
-#include "sz_string.h"
 
 void platform_log(char *msg, uint32_t len) {
 	printf("%.*s", len, msg);
@@ -30,18 +27,15 @@ int main() {
 			continue;
 		}
 
-		SZS_String str = szs_from_cstr(command);
-
-		// Get rid of the trailing newline
-		str = szs_drop_last(str);
-
-		SZS_String action = szs_split_left(&str, ' ');
-		if (szs_compare_cstr(action, "exit")) {
+		if (command[0] == 'e' && command[1] == 'x' && command[2] == 'i' && command[3] == 't') {
 			printf("Goodbye!\n");
 			exit = true;
 		}
 
-		SoftView_handle_command(str.data, str.size);
+		uint32_t len = 0;
+		while (command[len++] != '\0');
+
+		SoftView_handle_command(command, len);
 	}
 
 	return 0;

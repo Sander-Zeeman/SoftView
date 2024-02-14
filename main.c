@@ -7,8 +7,8 @@
 
 #include "sz_string.h"
 
-void platform_log(char *msg) {
-	printf("%s", msg);
+void platform_log(char *msg, uint32_t len) {
+	printf("%.*s", len, msg);
 }
 
 void print_prompt() {
@@ -41,7 +41,7 @@ int main() {
 			exit = true;
 		}
 
-		SoftView_handle_command(str.data);
+		SoftView_handle_command(str.data, str.size);
 	}
 
 	return 0;

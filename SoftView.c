@@ -21,14 +21,14 @@ void SoftView_canvas_clear() {
 void SoftView_canvas_set(SZS_String args) {
 	SZS_String type = szs_split_left(&args, ' ');
 	if (szs_compare_cstr(type, "bg")) {
-		platform_log(args.data);
+		platform_log(args.data, args.size);
 	} else if (szs_compare_cstr(type, "fg")) {
-		platform_log(args.data);
+		platform_log(args.data, args.size);
 	}
 }
 
-void SoftView_handle_command(char *command) {
-	platform_log(command);
+void SoftView_handle_command(char *command, uint32_t len) {
+	platform_log(command, len);
 
 	SZS_String str = szs_from_cstr(command);
 	SZS_String action = szs_split_left(&str, ' ');

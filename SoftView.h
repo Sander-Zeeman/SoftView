@@ -30,9 +30,9 @@ typedef struct {
 	Color fg;
 } Canvas;
 
-void platform_log(char *msg);
+void platform_log(char *msg, uint32_t len);
 
 SOFTVIEW_API("init") void SoftView_init(uint32_t width, uint32_t height);
-SOFTVIEW_API("handle") void SoftView_handle_command(char *command);
+SOFTVIEW_API("handle") void SoftView_handle_command(char *command, uint32_t len);
 SOFTVIEW_API("update") Color *SoftView_get();
 #endif // SOFTVIEW_H

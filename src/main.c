@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "SoftView.h"
+#include "../include/SoftView.h"
+
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "../include/stb_image_write.h"
 
 void platform_log(char *msg, uint32_t len) {
 	printf("%.*s", len, msg);
@@ -16,7 +19,9 @@ int main() {
 	char command[1024] = {0};
 	bool exit = false;
 
-	SoftView_init(800, 600);
+	size_t width = 800;
+	size_t height = 600;
+	SoftView_init(width, height);
 
 	while (!exit) {
 		print_prompt();
@@ -36,6 +41,14 @@ int main() {
 		while (command[len++] != '\0');
 
 		SoftView_handle_command(command, len);
+
+		const char *name = "test.png";
+		Color *data = SoftView_get();
+		if (!stbi_write_png(name, width, height, 4, data, width * sizeof(Color))) {
+			printf("Could not write image to file.\n");
+			exit = true;
+			continue;
+		}
 	}
 
 	return 0;

@@ -46,7 +46,7 @@ function update() {
 	ctx.putImageData(canvas_data, 0, 0);
 }
 
-WebAssembly.instantiateStreaming(fetch('SoftView.wasm'), {
+WebAssembly.instantiateStreaming(fetch('../SoftView.wasm'), {
 	env: {
 		platform_log,
 	}

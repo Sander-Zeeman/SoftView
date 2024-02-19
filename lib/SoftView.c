@@ -1,4 +1,4 @@
-#include "SoftView.h"
+#include "../include/SoftView.h"
 
 #include <stdbool.h>
 
@@ -80,7 +80,7 @@ void SoftView_canvas_set(char *args, uint32_t len) {
 }
 
 void SoftView_handle_command(char *command, uint32_t len) {
-	if (str_eq(command, len, "clear", 5)) {
+	if (str_eq(command, MIN(len, 5), "clear", 5)) {
 		SoftView_canvas_clear();
 	} else if (str_eq(command, MIN(len, 4), "set ", 4)) {
 		SoftView_canvas_set(command + 4, len - 4);

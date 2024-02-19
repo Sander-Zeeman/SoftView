@@ -3,14 +3,14 @@ CFLAGS = -Wall -Wextra -Wswitch-enum
 
 all: SoftView.term SoftView.wasm
 
-SoftView.o: SoftView.c
-	$(CC) $(CFLAGS) -c SoftView.c 
+SoftView.o: lib/SoftView.c
+	$(CC) $(CFLAGS) -c lib/SoftView.c 
 
 SoftView.term: SoftView.o
-	$(CC) $(CFLAGS) -o SoftView.term main.c SoftView.o
+	$(CC) $(CFLAGS) -o SoftView.term src/main.c SoftView.o
 
-SoftView.wasm: SoftView.c
-	$(CC) $(CFLAGS) -DWASM -Os --target=wasm32 --no-standard-libraries -Wl,--no-entry -Wl,--allow-undefined -o SoftView.wasm SoftView.c
+SoftView.wasm: lib/SoftView.c
+	$(CC) $(CFLAGS) -DWASM -Os --target=wasm32 --no-standard-libraries -Wl,--no-entry -Wl,--allow-undefined -o SoftView.wasm lib/SoftView.c
 
 clean:
 	rm -f SoftView.o
